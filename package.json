@@ -1,0 +1,15 @@
+{
+  "name": "gulp-sass",
+  "version": "1.0.0",
+  "description": "Compiles SASS files into CSS, minifies and blesses them.",
+  "main": "gulpfile.js",
+  "repository": "gulp-sass",
+  "devDependencies": {
+    "es6-promise": "^3.0.2",
+    "gulp": "~3.9.0",
+    "gulp-autoprefixer": "~3.1.0",
+    "gulp-bless": "~3.0.1",
+    "gulp-clean-css": "~2.0.7",
+    "gulp-sass": "~2.0.1"
+  }
+}
