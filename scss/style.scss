@@ -1,5 +1,44 @@
 $graph-height: 400px;
 
+body {
+  font-family: sans-serif;
+}
+
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+@mixin awesome-gradient-left {
+  background: #43cea2;
+  background: -webkit-linear-gradient(to left, #43cea2 , #185a9d);
+  background: linear-gradient(to left, #43cea2 , #185a9d);
+}
+@mixin awesome-gradient-top {
+  background: #43cea2;
+  background: -webkit-linear-gradient(to bottom, #43cea2 , #185a9d);
+  background: linear-gradient(to bottom, #43cea2 , #185a9d);
+}
+
 .graph-wrapper {
   position: relative;
   @media (min-width: 768px) {
@@ -10,7 +49,6 @@ $graph-height: 400px;
 .axis {
   @media (min-width: 768px) {
     float: left;
-    width: 10%;
     height: $graph-height;
     padding-right: 10px;
     text-align: right;
@@ -27,7 +65,6 @@ $graph-height: 400px;
   }
 }
 .graph {
-  width: 100%;
   display: flex;
   background-color: white;
   flex-direction: column;
@@ -49,16 +86,31 @@ $graph-height: 400px;
   }
 
   .bar {
-    background-color: #2E98d4;
+    @include awesome-gradient-left;
     position: relative;
     margin: 10px 0;
-    max-height: 40px;
+    height: 40px;
     @media (min-width: 768px) {
-      max-height: none;
+      @include awesome-gradient-top;
+      height: 400px;
       align-self: flex-end;
     }
     &.current {
       background-color: #00194B;
+    }
+    .bar-mask {
+      background-color: white;
+      position: absolute;
+      right: 0;
+      top: 0;
+      max-height: 40px;
+      min-height: 40px;
+      z-index: 1;
+      @media (min-width: 768px) {
+        width: 100% !important;
+        max-height: none;
+        min-height: auto;
+      }
     }
   }
 
@@ -99,13 +151,13 @@ $graph-height: 400px;
   // Bar width depends on number of bars
   @media (min-width: 768px) {
     .bar:first-child:nth-last-child(1) {
-      max-width: 100%;
+      width: 100%;
     }
 
     @for $i from 2 through 12 {
       .bar:first-child:nth-last-child(#{$i}),
       .bar:first-child:nth-last-child(#{$i}) ~ .bar {
-        max-width: (100/$i - 3)*1% !important;
+        width: (100/$i - 3)*1%;
         margin: 0 1.5%;
       }
     }
