@@ -38,6 +38,16 @@ body {
   background: -webkit-linear-gradient(to bottom, #43cea2 , #185a9d);
   background: linear-gradient(to bottom, #43cea2 , #185a9d);
 }
+@mixin current-gradient-left {
+  background: #3498db;
+  background: -webkit-linear-gradient(to left, #3498db, #2c3e50);
+  background: linear-gradient(to left, #3498db, #2c3e50);      
+}
+@mixin current-gradient-top {
+  background: #3498db;
+  background: -webkit-linear-gradient(to bottom, #3498db, #2c3e50);
+  background: linear-gradient(to bottom, #3498db, #2c3e50);
+}
 
 .graph-wrapper {
   position: relative;
@@ -96,7 +106,10 @@ body {
       align-self: flex-end;
     }
     &.current {
-      background-color: #00194B;
+      @include current-gradient-left;
+      @media (min-width: 768px) {
+        @include current-gradient-top;
+      }
     }
     .bar-mask {
       background-color: white;
